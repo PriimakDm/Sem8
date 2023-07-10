@@ -53,27 +53,46 @@ void PrintArrey(int[,] arrey)
     Console.WriteLine();
 }
 
-void TotalArrey(int[,] firstArrey, int[,] secondArrey, int[,] totalArrey)
+// void TotalArrey(int[,] firstArrey, int[,] secondArrey, int[,] totalArrey)
+// {
+//   for (int i = 0; i < totalArrey.GetLength(0); i++)
+//   {
+//     for (int j = 0; j < totalArrey.GetLength(1); j++)
+//     {
+//       int sum = 0;
+//       for (int k = 0; k < firstArrey.GetLength(1); k++)
+//       {
+//         sum += firstArrey[i,k] * secondArrey[k,j];
+//       }
+//       totalArrey[i,j] = sum;
+//     }
+//   }
+//   Console.WriteLine("Product of two arrays: ");
+//   Console.WriteLine();
+// }
+
+int[,] TotalArrey(int[,] firstArrey, int[,] secondArrey, int[,] totalArrey)
 {
-  for (int i = 0; i < totalArrey.GetLength(0); i++)
-  {
-    for (int j = 0; j < totalArrey.GetLength(1); j++)
+    int[,] totArrey = new int[firstArrey.GetLength(0), secondArrey.GetLength(1)];
+    if (firstArrey.GetLength(1) == secondArrey.GetLength(0))
     {
-      int sum = 0;
-      for (int k = 0; k < firstArrey.GetLength(1); k++)
-      {
-        sum += firstArrey[i,k] * secondArrey[k,j];
-      }
-      totalArrey[i,j] = sum;
+        for (int i = 0; i < totalArrey.GetLength(0); i++)
+        {
+            for (int j = 0; j < totalArrey.GetLength(1); j++)
+                {
+                    totalArrey[i,j] = 0;
+                    for (int k = 0; k < firstArrey.GetLength(1); k++)
+                        {
+                           totalArrey[i,j] += firstArrey[i,k] * secondArrey[k,j];
+                        }
+                }    
+        }
     }
-  }
-  Console.WriteLine("Product of two arrays: ");
-  Console.WriteLine();
+  return totArrey;
 }
 
 int [,] newArrey = CreateFirstArrey();
 PrintArrey (newArrey);
 int [,] new1Arrey = CreateSecondArrey();
 PrintArrey (new1Arrey);
-int [,] totArrey = TotalArrey (CreateFirstArrey, CreateSecondArrey);
-PrintArrey (totArrey);
+PrintArrey (TotalArrey);
