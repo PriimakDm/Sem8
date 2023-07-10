@@ -2,10 +2,12 @@
 
 
 
-Console.WriteLine("Enter count of rows: ");
-int userRows = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Enter count of collumns: ");
-int userColls = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Enter count of rows of first arrey: ");
+int user1Rows = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Enter count of collumns of first arrey (rows of second arrey): ");
+int user12Colls = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Enter count of collumns of second arrey: ");
+int user2Colls = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine("Enter min possible value: ");
 int userMin = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine("Enter max possible value: ");
@@ -14,11 +16,11 @@ Console.WriteLine();
 
 int[,] CreateFirstArrey()
 {
-    int[,] created1Arrey = new int[userRows, userColls];
+    int[,] created1Arrey = new int[user1Rows, user12Colls];
 
-    for (int i = 0; i < userRows; i++)
+    for (int i = 0; i < user1Rows; i++)
     {
-        for (int j = 0; j < userColls; j++)
+        for (int j = 0; j < user12Colls; j++)
         {
             created1Arrey[i, j] = new Random().Next(userMin, userMax + 1);
         }
@@ -28,11 +30,11 @@ int[,] CreateFirstArrey()
 
 int[,] CreateSecondArrey()
 {
-    int[,] created2Arrey = new int[userRows, userColls];
+    int[,] created2Arrey = new int[user12Colls, user2Colls];
 
-    for (int i = 0; i < userRows; i++)
+    for (int i = 0; i < user12Colls; i++)
     {
-        for (int j = 0; j < userColls; j++)
+        for (int j = 0; j < user12Colls; j++)
         {
             created2Arrey[i, j] = new Random().Next(userMin, userMax + 1);
         }
@@ -71,9 +73,9 @@ void PrintArrey(int[,] arrey)
 //   Console.WriteLine();
 // }
 
-int[,] TotalArrey(int[,] firstArrey, int[,] secondArrey, int[,] totalArrey)
+int[,] TotalArrey(int[,] firstArrey, int[,] secondArrey)
 {
-    int[,] totArrey = new int[firstArrey.GetLength(0), secondArrey.GetLength(1)];
+    int[,] totalArrey = new int[firstArrey.GetLength(0), secondArrey.GetLength(1)];
     if (firstArrey.GetLength(1) == secondArrey.GetLength(0))
     {
         for (int i = 0; i < totalArrey.GetLength(0); i++)
@@ -88,11 +90,14 @@ int[,] TotalArrey(int[,] firstArrey, int[,] secondArrey, int[,] totalArrey)
                 }    
         }
     }
-  return totArrey;
+  return totalArrey;
 }
 
 int [,] newArrey = CreateFirstArrey();
 PrintArrey (newArrey);
 int [,] new1Arrey = CreateSecondArrey();
 PrintArrey (new1Arrey);
-PrintArrey (TotalArrey);
+int [,] new2Arrey = TotalArrey(newArrey, new1Arrey);
+Console.WriteLine("Product of two arrays: ");
+Console.WriteLine("");
+PrintArrey (new2Arrey);
